@@ -81,7 +81,7 @@ jobs:
       - name: "📥 Initialize repo"
         working-directory: ${{ env.WORK_DIR}}
         run: |
-          repo init -u https://android.googlesource.com/kernel/manifest -b common-android13-5.15-lts --depth=1
+          repo init -u https://android.googlesource.com/kernel/manifest git fetch upstream android13-5.15-2023-08 --depth=1
           repo sync --optimized-fetch --prune --no-clone-bundle --no-tags -j$(nproc --all)
           
           rm -rf .repo
@@ -99,7 +99,7 @@ jobs:
           sed -i \
            -e 's/^BRANCH=.*/BRANCH=android13-5.15/' \
            -e 's/^CLANG_VERSION=.*/CLANG_VERSION=r547379/' \
-           ${{ env.kernelDir }}/${{ env.kernelName }}/build.config.constants
+           ${{  env.kernelName }}/build.config.constants
           
           sed -i '/^DEFCONFIG=gki_defconfig/d' ${{ env.kernelDir }}/${{ env.kernelName }}/build.config.gki
           sed -i '$a\DEFCONFIG=${{ env.DEFCONFIG_NAME }}' ${{ env.kernelDir }}/${{ env.kernelName }}/build.config.gki
