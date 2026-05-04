@@ -81,7 +81,7 @@ jobs:
       - name: "📥 Initialize repo"
         working-directory: ${{ env.WORK_DIR}}
         run: |
-          repo init -u https://android.googlesource.com/kernel/manifest git fetch upstream android13-5.15-2023-08 --depth=1
+          repo init -u https://android.googlesource.com/kernel/common/+/refs/tags/android13-5.15.123_r00 git fetch upstream android13-5.15.123_r00 --depth=1
           repo sync --optimized-fetch --prune --no-clone-bundle --no-tags -j$(nproc --all)
           
           rm -rf .repo
